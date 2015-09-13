@@ -12,9 +12,11 @@ day<- as.numeric(format(date,"%d"))
 mydata <- filter(data, year == 2007 & month == 2 & day < 3 )
 rm(data)
 
-# Produce plot 2
+# Produce plot 4 and save it to file
 myDateTime <- paste(mydata$Date,mydata$Time,sep = " ")
 time <- strptime(myDateTime,format="%d/%m/%Y %H:%M:%S")
+png(file="plot4.png", height=480, width=480, bg= "white")
+
 par(mfrow=c(2,2))
 
 plot(time,mydata$Global_active_power,type="l",xlab="",ylab="Global Active Power")
@@ -28,8 +30,5 @@ legend("topright",col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_met
 
 plot(time,mydata$Global_reactive_power,type="l",xlab="datetime",ylab="Global_reactive_power")
 
-
-# Save to file
-dev.copy(png, file="plot4.png", height=480, width=480, bg= "white")
 dev.off()
 cat("plot4.png has been saved in ", getwd(),"\n")
